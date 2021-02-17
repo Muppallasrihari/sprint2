@@ -36,9 +36,9 @@ public class ExerciseController {
 		return new ResponseEntity<Exercise>(ex1, HttpStatus.OK);
 	}
 	
-	@GetMapping("/{exPlanIdentifier}")
-	public ResponseEntity<?> getExerciseById(@PathVariable String exPlanIdentifier){
-		Exercise exercise = exerciseService.findExerciseByExPlanIdentifier(exPlanIdentifier);
+	@GetMapping("/{exIdentifier}")
+	public ResponseEntity<?> getExerciseById(@PathVariable String exIdentifier){
+		Exercise exercise = exerciseService.findExerciseByExIdentifier(exIdentifier);
 		return new ResponseEntity<Exercise>(exercise,HttpStatus.OK);
 		
 	}
@@ -48,9 +48,9 @@ public class ExerciseController {
 		return exerciseService.getAllExercises();
 	}
 	
-	@DeleteMapping("/{exPlanIdentifier}")
-	public ResponseEntity<?> deleteExercise(@PathVariable String exPlanIdentifier){
-		exerciseService.deleteExerciseByExPlanIdentifier(exPlanIdentifier);
-		return new ResponseEntity<String> ("Project with ID "+ exPlanIdentifier.toUpperCase()+" deleted successfully", HttpStatus.OK);
+	@DeleteMapping("/{exIdentifier}")
+	public ResponseEntity<?> deleteExercise(@PathVariable String exIdentifier){
+		exerciseService.deleteExerciseByExIdentifier(exIdentifier);
+		return new ResponseEntity<String> ("Project with ID "+ exIdentifier.toUpperCase()+" deleted successfully", HttpStatus.OK);
 	}
 }

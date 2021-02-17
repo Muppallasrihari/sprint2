@@ -9,7 +9,7 @@ import com.cg.healthify.beans.Exercise;
 @Repository
 public interface ExerciseRepository extends JpaRepository<Exercise, Integer>{
 	
-	Exercise findByExPlanIdentifier(String exPlanIdentifier);
+	Exercise findByExIdentifier(String exIdentifier);
 	
 
 	
