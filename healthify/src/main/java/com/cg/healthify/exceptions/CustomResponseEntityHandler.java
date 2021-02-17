@@ -22,5 +22,10 @@ public class CustomResponseEntityHandler extends ResponseEntityExceptionHandler 
 		CaloriesLogIdExceptionResponse caloriesLogIdExceptionResponse=new CaloriesLogIdExceptionResponse(ex.getMessage());
 		return new ResponseEntity<Object>(caloriesLogIdExceptionResponse,HttpStatus.BAD_REQUEST);
 	}
+	public ResponseEntity<Object> handleWeightLogIdException(WeightLogIdException ex,WebRequest request)
+	{
+		WeightLogIdExceptionResponse weightLogIdExceptionResponse=new WeightLogIdExceptionResponse(ex.getMessage());
+		return new ResponseEntity<Object>(weightLogIdExceptionResponse,HttpStatus.BAD_REQUEST);
+	}
 }
      
