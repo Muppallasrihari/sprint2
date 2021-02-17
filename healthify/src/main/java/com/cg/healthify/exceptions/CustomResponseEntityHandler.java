@@ -11,6 +11,24 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 @RestController
 public class CustomResponseEntityHandler extends ResponseEntityExceptionHandler {
+	
+/***-----------------------------------Customer-Exception-Handler-Section-----------------------------*/	
+	@ExceptionHandler
+	public ResponseEntity<Object>handleCustomerNameException(CustomerException ex,WebRequest request){
+		CustomerExceptionResponse customerExceptionResponse=new CustomerExceptionResponse(ex.getMessage());
+		return new ResponseEntity<Object>(customerExceptionResponse,HttpStatus.BAD_REQUEST);
+	}
+/**---------------------------------------------------------------------------------------------------**/
+
+/**-------------------------------------Diet-Plan-Exception-Handler-Section---------------------------**/
+	@ExceptionHandler
+	public ResponseEntity<Object> handleDietPlanException(DietPlanException ex, WebRequest request){
+		DietPlanExceptionResponse dietPlanExceptionResponse =  new DietPlanExceptionResponse(ex.getMessage());
+		return new ResponseEntity<Object>(dietPlanExceptionResponse,HttpStatus.BAD_REQUEST);
+	}	
+/**---------------------------------------------------------------------------------------------------**/
+
+	
 	@ExceptionHandler
 	public ResponseEntity<Object> handleNutritionIdException(NutritionIdException ex,WebRequest request){
 		NutritionIdExceptionResponse nutritionIdExceptionResponse=new NutritionIdExceptionResponse(ex.getMessage());
