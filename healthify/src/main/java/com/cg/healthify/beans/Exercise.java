@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -12,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
@@ -22,7 +20,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 
 @Entity
 public class Exercise {
@@ -34,7 +31,7 @@ public class Exercise {
 	@NotBlank(message = "Exercise Identifier should not be blank")
 	@Size(min=3, max=10, message = "Please use 3 to 10 charecters")
 	@Column(updatable = false, unique = true)
-	private String exPlanIdentifier;
+	private String exIdentifier;
 	
 	@NotBlank
 	private String exType;
@@ -49,8 +46,8 @@ public class Exercise {
 	
 	@NotBlank
 	private String exPlan;
-	//-------------------------------------------------------------
 	
+	//-------------------------------------------------------------------------------
 	
 	@ElementCollection
 	@CollectionTable(name="ExercisePlans")
@@ -63,33 +60,16 @@ public class Exercise {
 	public void setExPlans(Collection<String> exPlans) {
 		this.exPlans = exPlans;
 	}
-
-	//--------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^------------------------------------------------------
+	
+	
+	
+	//--------------------------------------------------------------------------------
+	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date created_At;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date updated_At;
-	
-	//OneToMany with User -- one user can have many exercises
-	
-	//-------------------------------------------------------------------------------
-
-	//ManyToOne -- many Exercises can belong to one user
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="User_id")
-//	private User user;
-//	
-//	public User getUser() {
-//		return user;
-//	}
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-	
-	
-	//--------------------------------------------------------------------------------
-	
 	
 	public int getId() {
 		return id;
@@ -97,12 +77,11 @@ public class Exercise {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getExPlanIdentifier() {
-		return exPlanIdentifier;
+	public String getExIdentifier() {
+		return exIdentifier;
 	}
-	public void setExPlanIdentifier(String exPlanIdentifier) {
-		this.exPlanIdentifier = exPlanIdentifier;
+	public void setExIdentifier(String exIdentifier) {
+		this.exIdentifier = exIdentifier;
 	}
 	public String getExType() {
 		return exType;

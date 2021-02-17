@@ -47,8 +47,8 @@ public class CustomResponseEntityHandler extends ResponseEntityExceptionHandler 
 		return new ResponseEntity<Object>(weightLogIdExceptionResponse,HttpStatus.BAD_REQUEST);
 	}
 	@ExceptionHandler
-	public ResponseEntity<Object> handleExerciseIdException(ExercisePlanIdException exIdException, WebRequest request){
-		ExercisePlanIdExceptionResponse exerciseIdExceptionResponse = new ExercisePlanIdExceptionResponse(exIdException.getMessage());
+	public ResponseEntity<Object> handleExerciseIdException(ExerciseIdException exIdException, WebRequest request){
+		ExerciseIdExceptionResponse exerciseIdExceptionResponse = new ExerciseIdExceptionResponse(exIdException.getMessage());
 		return new ResponseEntity<Object>(exerciseIdExceptionResponse,HttpStatus.BAD_REQUEST);
 	}
 	

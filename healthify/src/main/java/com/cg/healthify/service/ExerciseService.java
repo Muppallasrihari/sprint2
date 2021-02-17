@@ -1,26 +1,27 @@
 package com.cg.healthify.service;
 
 
+import org.springframework.stereotype.Service;
 
 import com.cg.healthify.beans.Exercise;
 
 
+@Service
 public interface ExerciseService {
 	
 	
 	
-	//save and update
 	public Exercise saveOrUpdate(Exercise exercise);
-		 
-	//Find by exIdentifier
-	public Exercise findExerciseByExPlanIdentifier(String exPlanIdentifier); 
-	
+		
+	//Find by ID
+	public Exercise findExerciseByExIdentifier(String exIdentifier) ;
+		
 	//Find ALL
 	public Iterable<Exercise> getAllExercises();
-	
-	//Delete by exIdentifier
-	public Exercise deleteExerciseByExPlanIdentifier(String exPlanIdentifier) ;
-	
+		
+	//Delete by exid
+	public void deleteExerciseByExIdentifier(String exIdentifier) ;
+		
 	
 	
 }

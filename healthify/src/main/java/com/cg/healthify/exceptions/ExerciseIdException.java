@@ -4,18 +4,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class ExercisePlanIdException extends RuntimeException{
+public class ExerciseIdException extends RuntimeException{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public ExercisePlanIdException() {
+	public ExerciseIdException() {
 		super();
 	}
 	
-	public ExercisePlanIdException(String errMsg) {
+	public ExerciseIdException(String errMsg) {
 		super(errMsg);
 	}
 
