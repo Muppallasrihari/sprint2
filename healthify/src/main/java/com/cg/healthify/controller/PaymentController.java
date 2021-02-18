@@ -49,12 +49,12 @@ public class PaymentController {
 	}
 
 	@GetMapping("/payments")
-	public List<Payment> getAllPayments() {
+	public Iterable<Payment> getAllPayments() {
 		return paymentService.getAllPayments();
 	}
 
 	@GetMapping("/payment/{id}")
-	public ResponseEntity<Payment> findPaymentById(@PathVariable("id") int id) {
+	public ResponseEntity<Payment> findPaymentById(@PathVariable("id") Long id) {
 		Payment payment = paymentService.findPaymentById(id);
 		/*if (payment == null) {
 			throw new Payment("Invalid ID" + id);
@@ -64,7 +64,7 @@ public class PaymentController {
 	}
 
 	@DeleteMapping("/payment/{id}")
-	public void deletePayment(@PathVariable("id") int id) {
+	public void deletePayment(@PathVariable("id") Long id) {
 		paymentService.deletePayment(id);
 	}
 

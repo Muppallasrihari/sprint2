@@ -8,50 +8,47 @@ import org.springframework.stereotype.Service;
 
 import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.beans.Payment;
+import com.cg.healthify.exceptions.PaymentNameException;
 import com.cg.healthify.repository.NutritionPlanRepositiry;
 import com.cg.healthify.repository.PaymentRepository;
 
 
-@Service("PaymentServiceImpl")
+@Service
 public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	private PaymentRepository paymentRepository;
 	
-	@Autowired
-	private NutritionPlanRepositiry NutritionPlanRepository;
 	
 	public Payment saveOrUpdate(Payment payment) {
 		
 		try {
 		
+			payment.setName(payment.getName().toUpperCase());
 			
 			return paymentRepository.save(payment);
 		} catch (Exception e) {
-	//		throw new PaymentNameException("Name : " + payment.getName().toUpperCase() + " already exists");
+			throw new PaymentNameException("Name : " + payment.getName().toUpperCase() + " already exists");
 		}
-		return payment;
 
 	}
 
 	
 
 	
-	public List<Payment> getAllPayments() {
-		List<Payment> payments = new ArrayList<Payment>();
-		paymentRepository.findAll().forEach(pay -> payments.add(pay));
-		return payments;
+	public  Iterable<Payment> getAllPayments() {
+		return paymentRepository.findAll();
 	}
 
-	public Payment findPaymentById(long id) {
+	public Payment findPaymentById(Long id) {
 		return paymentRepository.findById(id).get();
 	}
 
-	public void deletePayment(long id) {
+	public void deletePayment(Long id) {
 		paymentRepository.deleteById(id);
 	}
 
-	public Payment Update(Payment payment, long id) {
+	public Payment Update(Payment payment, Long id) {
 		return paymentRepository.save(payment);
 	}
 

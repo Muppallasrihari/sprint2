@@ -23,7 +23,7 @@ public class NutritionPlan {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@NotNull(message="Nutrition Plan Id is required.")
 	@Column(updatable=false)
@@ -58,12 +58,12 @@ public class NutritionPlan {
 		this.planId = planId;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -12,12 +12,12 @@ public interface PaymentService {
 	
 	public Payment saveOrUpdate(Payment payment);
 
-	public List<Payment> getAllPayments();
+	public Iterable<Payment> getAllPayments();
 	
-	public Payment findPaymentById(long id);
+	public Payment findPaymentById(Long id);
 
-	public void deletePayment(long id);
+	public void deletePayment(Long id);
 
-	public Payment Update(Payment payment, long id) ;
+	public Payment Update(Payment payment, Long id) ;
 
 }
