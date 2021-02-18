@@ -8,6 +8,6 @@ import com.cg.healthify.beans.NutritionPlan;
 public interface NutritionPlanService {
 	public NutritionPlan addOrUpdate(NutritionPlan nutritionPlan);
 	public Iterable<NutritionPlan> getAllNutritionPlans();
-	public NutritionPlan getNutritionPlanById(int planId);
-	public void deleteNutritionPlanById(int planId);
+	public NutritionPlan getNutritionPlanById(String planId);
+	public void deleteNutritionPlanById(String planId);
 }

@@ -15,30 +15,31 @@ public class NutritionPlanServiceImpl implements NutritionPlanService{
 	@Override
 	public NutritionPlan addOrUpdate(NutritionPlan nutritionPlan) {
 		try {
-			nutritionPlan.setPlanId(nutritionPlan.getPlanId());
-			return nutritionRepository.save(nutritionPlan);
+			nutritionPlan.setPlanId(nutritionPlan.getPlanId().toUpperCase());
+			return	nutritionRepository.save(nutritionPlan);
 		} catch (Exception e) {
-			throw new NutritionIdException("NUtrition Plan with :" + nutritionPlan.getPlanId() + " is already exists.");
+			throw new NutritionIdException("Nutrition Plan with id---" + nutritionPlan.getPlanId().toUpperCase() + " ---is already exists.");
 		}
+		
 	}
 	@Override
 	public Iterable<NutritionPlan> getAllNutritionPlans() {
 		return nutritionRepository.findAll();
 	}
 	@Override
-	public NutritionPlan getNutritionPlanById(int planId) {
-		NutritionPlan nutritionPlan = nutritionRepository.findByPlanId(planId);
+	public NutritionPlan getNutritionPlanById(String planId) {
+		NutritionPlan nutritionPlan = nutritionRepository.findByPlanId(planId.toUpperCase());
 		if (nutritionPlan == null) {
-			throw new NutritionIdException("Nutrition Plan with :" + planId + " does not exists.");
+			throw new NutritionIdException("Nutrition Plan with Id---" + planId.toUpperCase() + " ---does not exists.");
 		}
 		return nutritionPlan;
 
 	}
 	@Override
-	public void deleteNutritionPlanById(int planId) {
-		NutritionPlan nutritionPlan = nutritionRepository.findByPlanId(planId);
+	public void deleteNutritionPlanById(String planId) {
+		NutritionPlan nutritionPlan = nutritionRepository.findByPlanId(planId.toUpperCase());
 		if (nutritionPlan == null) {
-			throw new NutritionIdException("Nutrition Plan with :" + planId + " does not exists.");
+			throw new NutritionIdException("Nutrition Plan with Id---" + planId.toUpperCase() + " ---does not exists.");
 		}
 		nutritionRepository.delete(nutritionPlan);
 	}

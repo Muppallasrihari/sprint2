@@ -8,7 +8,7 @@ import com.cg.healthify.beans.NutritionPlan;
 @Repository
 public interface NutritionPlanRepository extends CrudRepository<NutritionPlan,Integer>{
 
-	NutritionPlan findByPlanId(int planId);
+	NutritionPlan findByPlanId(String planId);
 
 	
 
