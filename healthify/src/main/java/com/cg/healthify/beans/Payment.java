@@ -39,8 +39,8 @@ public class Payment {
 	@NotBlank(message = "Plan Category should not be empty")
 	private String planCategory;
 
-	@OneToOne(mappedBy="payment",fetch=FetchType.EAGER,cascade = CascadeType.ALL)
-    private NutritionPlan nutritionPlan;
+	//@OneToOne(mappedBy="payment",fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+    //private NutritionPlan nutritionPlan;
 
 	public Payment() {
 		super();
@@ -56,7 +56,7 @@ public class Payment {
 		this.createdAt = createdAt;
 		this.planCategory = planCategory;
 	}
-
+/*
 	public NutritionPlan getNutritionPlan() {
 		return nutritionPlan;
 	}
@@ -64,7 +64,7 @@ public class Payment {
 	public void setNutritionPlan(NutritionPlan nutritionPlan) {
 		this.nutritionPlan = nutritionPlan;
 	}
-
+*/
 	public Long getId() {
 		return id;
 	}

@@ -41,10 +41,10 @@ public class NutritionPlan {
 	@NotNull(message="Nutrition Plan Id is required.")
 	private double price;
 	
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="id",nullable=false)
-	@JsonIgnore
-	private Payment payment;
+	//@OneToOne(fetch=FetchType.EAGER)
+	//@JoinColumn(name="id",nullable=false)
+	//@JsonIgnore
+	//private Payment payment;
 
 	public NutritionPlan() {
 		super();
@@ -115,7 +115,7 @@ public class NutritionPlan {
 	}
 	
 	@PrePersist
-	public void onCretae() {
+	public void onCreate() {
 		this.createdAt=new Date();
 	}
 	@PreUpdate
