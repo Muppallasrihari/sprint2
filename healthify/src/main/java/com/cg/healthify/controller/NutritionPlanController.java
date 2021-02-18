@@ -38,7 +38,7 @@ public class NutritionPlanController {
 	
 	
 	@GetMapping("/nutritionplan/{planId}")
-	public ResponseEntity<NutritionPlan> getNutritionPlanById(@PathVariable int planId){
+	public ResponseEntity<NutritionPlan> getNutritionPlanById(@PathVariable String planId){
 		NutritionPlan nutritionPlan=nutritionPlanService.getNutritionPlanById(planId);
 		return new ResponseEntity<NutritionPlan>(nutritionPlan,HttpStatus.OK);
 	}
@@ -49,7 +49,7 @@ public class NutritionPlanController {
 	}
 	
 	@DeleteMapping("/nutritionplan/{planId}")
-	public ResponseEntity<?> deleteNutritionPlanById(@PathVariable int planId) {
+	public ResponseEntity<?> deleteNutritionPlanById(@PathVariable String planId) {
 		nutritionPlanService.deleteNutritionPlanById(planId);
 		return new ResponseEntity<String>("Nutrition Plan with Id "+planId+" deleted successfully", HttpStatus.OK);
 	}

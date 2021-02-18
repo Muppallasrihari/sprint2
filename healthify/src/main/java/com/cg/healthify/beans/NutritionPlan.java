@@ -4,12 +4,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.Min;
@@ -17,63 +14,49 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class NutritionPlan {
-	
-	@NotNull(message = "Nutrition Plan Id is required.")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@NotBlank(message = "Nutrition Plan Id is required.")
 	@Column(unique = true, updatable = false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-	
-	@NotNull(message="Nutrition Plan Id is required.")
-	@Column(updatable=false)
-	private int planId;
+	private String planId;
 	@NotBlank(message = "Nutrition Plan Name is required.")
-	
-	@NotBlank(message="Nutrition Plan Name is required.")
 	private String name;
 	@NotBlank(message = "Nutrition Plan Description is required.")
-	
-	@NotBlank(message="Nutrition Plan Description is required.")
 	private String description;
 	@JsonFormat
-
-
 	private Date createdAt;
 	@JsonFormat
 	private Date updatedAt;
-	@NotNull(message = "Nutrition Plan Id is required.")
+	@NotNull(message = "Nutrition Plan Price is required.")
 	@Min(value = 0)
-	
-	@NotNull(message="Nutrition Plan Id is required.")
 	private double price;
 
-	//@OneToOne(fetch=FetchType.EAGER)
-	//@JoinColumn(name="id",nullable=false)
-	//@JsonIgnore
-	//private Payment payment;
+	// @OneToOne(fetch=FetchType.EAGER)
+	// @JoinColumn(name="id",nullable=false)
+	// @JsonIgnore
+	// private Payment payment;
 
 	public NutritionPlan() {
 		super();
 	}
 
-	public int getPlanId() {
+	public String getPlanId() {
 		return planId;
 	}
 
-	public void setPlanId(int planId) {
+	public void setPlanId(String planId) {
 		this.planId = planId;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-
-
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -121,14 +104,12 @@ public class NutritionPlan {
 	public void onCreate() {
 		this.createdAt = new Date();
 
-		this.createdAt=new Date();
-		}
+		this.createdAt = new Date();
+	}
 
 	@PreUpdate
 	public void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	
-	
 
 }
