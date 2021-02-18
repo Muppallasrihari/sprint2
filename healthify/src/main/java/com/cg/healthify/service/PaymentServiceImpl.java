@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.beans.Payment;
 import com.cg.healthify.exceptions.PaymentNameException;
-import com.cg.healthify.repository.NutritionPlanRepositiry;
 import com.cg.healthify.repository.PaymentRepository;
 
 
