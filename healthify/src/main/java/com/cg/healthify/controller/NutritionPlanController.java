@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.service.MapValidationErrorService;
 import com.cg.healthify.service.NutritionPlanService;
+import com.cg.healthify.service.NutritionPlanServiceImpl;
 
 @RestController
 public class NutritionPlanController {
