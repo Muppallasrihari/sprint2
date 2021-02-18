@@ -26,7 +26,30 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class WeightLog {
+	
+	public WeightLog() {
+		super();
+	}
+	public WeightLog(Long id,
+			@NotBlank(message = "weightId Required") @Size(min = 2, max = 4, message = "Must be between the size(min=2 ,max=4)") String weightId,
+			@NotBlank(message = "weight Required") String weight, Date created_At, Date updated_At) {
+		super();
+		this.id = id;
+		this.weightId = weightId;
+		this.weight = weight;
+		this.created_At = created_At;
+		Updated_At = updated_At;
+	}
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	/**
 	 * @param WeightId
@@ -37,7 +60,7 @@ public class WeightLog {
 	@NotBlank(message="weightId Required")
 	@Size(min=2,max=4,message="Must be between the size(min=2 ,max=4)")
 	@Column(unique = true,updatable = false)
-	@Id
+
 	private String weightId;
 
 	/**
