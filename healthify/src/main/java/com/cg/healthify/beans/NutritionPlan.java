@@ -4,13 +4,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class NutritionPlan {
@@ -18,20 +24,27 @@ public class NutritionPlan {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	@NotBlank(message="Nutrition Plan Id is required.")
+	
+	@NotNull(message="Nutrition Plan Id is required.")
 	@Column(updatable=false)
 	private int planId;
+	
 	@NotBlank(message="Nutrition Plan Name is required.")
 	private String name;
+	
 	@NotBlank(message="Nutrition Plan Description is required.")
 	private String description;
+	
 	private Date createdAt;
 	private Date updatedAt;
-	@NotBlank(message="Nutrition Plan Id is required.")
-	@Min(value=0)
+	
+	@NotNull(message="Nutrition Plan Id is required.")
 	private double price;
 	
-	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id",nullable=false)
+	@JsonIgnore
+	private Payment payment;
 
 	public NutritionPlan() {
 		super();

@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.beans.Payment;
+import com.cg.healthify.repository.NutritionPlanRepositiry;
 import com.cg.healthify.repository.PaymentRepository;
 
 
@@ -15,20 +17,21 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	private PaymentRepository paymentRepository;
-
+	
+	@Autowired
+	private NutritionPlanRepositiry NutritionPlanRepository;
 	
 	public Payment saveOrUpdate(Payment payment) {
 		
-	//	payment.setNutritionPlan(payment.getNutritionPlan());
-		return paymentRepository.save(payment);
-/*
 		try {
-			payment.setName(payment.getName().toUpperCase());
+		
+			
 			return paymentRepository.save(payment);
 		} catch (Exception e) {
-			throw new PaymentNameException("Name : " + payment.getName().toUpperCase() + " already exists");
+	//		throw new PaymentNameException("Name : " + payment.getName().toUpperCase() + " already exists");
 		}
-*/
+		return payment;
+
 	}
 
 	

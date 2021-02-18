@@ -2,11 +2,11 @@ package com.cg.healthify.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.cg.healthify.beans.Payment;
       
-@Component
+@Service
 public interface PaymentService {
 
 	
