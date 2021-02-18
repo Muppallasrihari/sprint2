@@ -4,11 +4,13 @@ import java.sql.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -20,7 +22,9 @@ public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PaymentId")
-	private long id;
+	private Long id;
+	
+	private int planId;
 
 	@NotBlank(message = "Name should not be empty")
 	@Column(unique = true, updatable = false)
@@ -35,9 +39,8 @@ public class Payment {
 	@NotBlank(message = "Plan Category should not be empty")
 	private String planCategory;
 
-	// @ManyToOne(targetEntity=NutritionPlan.class,cascade = CascadeType.ALL)
-//	@JoinColumn(name = "NUTRITION_PLAN_ID")
-//	private NutritionPlan nutritionPlan;
+	//@OneToOne(mappedBy="payment",fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+    //private NutritionPlan nutritionPlan;
 
 	public Payment() {
 		super();
@@ -62,11 +65,11 @@ public class Payment {
 		this.nutritionPlan = nutritionPlan;
 	}
 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -106,5 +109,13 @@ public class Payment {
 	public String toString() {
 		return "Payment [id=" + id + ", name=" + name + ", payment=" + payment + ", createdAt=" + createdAt
 				+ ", planCategory=" + planCategory + "]";
+	}
+
+	public int getPlanId() {
+		return planId;
+	}
+
+	public void setPlanId(int planId) {
+		this.planId = planId;
 	}
 }

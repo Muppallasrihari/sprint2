@@ -60,4 +60,66 @@ public void onCreate() {
 public void onUpdate() {
 	this.updatedDate=new Date();
 }
+public Long getId() {
+	return id;
+}
+public void setId(Long id) {
+	this.id = id;
+}
+public String getContact() {
+	return contact;
+}
+public void setContact(String contact) {
+	this.contact = contact;
+}
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public String getGender() {
+	return gender;
+}
+public void setGender(String gender) {
+	this.gender = gender;
+}
+public String getCustomerIdentifier() {
+	return customerIdentifier;
+}
+public void setCustomerIdentifier(String customerIdentifier) {
+	this.customerIdentifier = customerIdentifier;
+}
+public String getPaymentIdentifier() {
+	return paymentIdentifier;
+}
+public void setPaymentIdentifier(String paymentIdentifier) {
+	this.paymentIdentifier = paymentIdentifier;
+}
+public Integer getPTSequence() {
+	return PTSequence;
+}
+public void setPTSequence(Integer pTSequence) {
+	PTSequence = pTSequence;
+}
+public DietPlan getDietPlan() {
+	return dietPlan;
+}
+public void setDietPlan(DietPlan dietPlan) {
+	this.dietPlan = dietPlan;
+}
+public Date getCreatedDate() {
+	return createdDate;
+}
+public void setCreatedDate(Date createdDate) {
+	this.createdDate = createdDate;
+}
+public Date getUpdatedDate() {
+	return updatedDate;
+}
+public void setUpdatedDate(Date updatedDate) {
+	this.updatedDate = updatedDate;
+}
+
+
 }

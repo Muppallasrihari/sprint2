@@ -13,7 +13,7 @@ import com.cg.healthify.beans.WeightLog;
  *
  */
 @Repository
-public interface WeightLogRepository extends CrudRepository<WeightLog, String> {
+public interface WeightLogRepository extends CrudRepository<WeightLog, Long> {
 
 	/**
 	 * @param weightId
