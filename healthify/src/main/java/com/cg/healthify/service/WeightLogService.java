@@ -1,10 +1,11 @@
 package com.cg.healthify.service;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.cg.healthify.beans.WeightLog;
 
-@Component
+@Service
 public interface WeightLogService {
 
 	public WeightLog addOrUpdateWeightLog(WeightLog weightLog);

@@ -18,6 +18,9 @@ import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class Customer {
 	@Id
@@ -66,7 +69,22 @@ public class Customer {
 	 **/
 	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = Exercise.class)
 	private Exercise exercise;
+/**
+ * ---------------------------OneToMany mapping with WeightLog
+ * ----------------
+ */
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.ALL,targetEntity=WeightLog.class)
+     private List<WeightLog> weightLog=new ArrayList<>();
+	
+	
+	public List<WeightLog> getWeightLog() {
+	return weightLog;
+}
 
+public void setWeightLog(List<WeightLog> weightLog) {
+	this.weightLog = weightLog;
+}
 
 	@Column(updatable = false)
 	private Date createdDate;
@@ -194,12 +212,23 @@ public class Customer {
 		this.exercise = exercise;
 	}
 
+	
+/*	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", contact=" + contact + ", name=" + name + ", gender=" + gender
+				+ ", customerIdentifier=" + customerIdentifier + ", paymentIdentifier=" + paymentIdentifier
+				+ ", planId=" + planId + ", PTSequence=" + PTSequence + ", dietPlan=" + dietPlan + ", nutritionPlan="
+				+ nutritionPlan + ", payment=" + payment + ", exercise=" + exercise + ", weightLog=" + weightLog
+				+ ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+	}
+
 	public Customer(Long id, @NotBlank(message = "Contact Required") String contact,
 			@NotBlank(message = "Name Required") String name, @NotBlank(message = "Gender Required") String gender,
 			@NotBlank(message = "Customer Identifier Reqiured") String customerIdentifier,
 			@NotBlank(message = "Payment Identifier Required") String paymentIdentifier,
 			@NotBlank(message = "Plan Id is Required") String planId, Integer pTSequence, DietPlan dietPlan,
-			NutritionPlan nutritionPlan, List<Payment> payment, Exercise exercise, Date createdDate, Date updatedDate) {
+			NutritionPlan nutritionPlan, List<Payment> payment, Exercise exercise, List<WeightLog> weightLog,
+			Date createdDate, Date updatedDate) {
 		super();
 		this.id = id;
 		this.contact = contact;
@@ -213,18 +242,10 @@ public class Customer {
 		this.nutritionPlan = nutritionPlan;
 		this.payment = payment;
 		this.exercise = exercise;
+		this.weightLog = weightLog;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
-	}
-
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", contact=" + contact + ", name=" + name + ", gender=" + gender
-				+ ", customerIdentifier=" + customerIdentifier + ", paymentIdentifier=" + paymentIdentifier
-				+ ", planId=" + planId + ", PTSequence=" + PTSequence + ", dietPlan=" + dietPlan + ", nutritionPlan="
-				+ nutritionPlan + ", payment=" + payment + ", exercise=" + exercise + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + "]";
-	}
+	}*/
 
 	public Customer() {
 		super();

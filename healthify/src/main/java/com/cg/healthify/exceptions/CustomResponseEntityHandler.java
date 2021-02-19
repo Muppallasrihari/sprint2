@@ -26,6 +26,7 @@ public class CustomResponseEntityHandler extends ResponseEntityExceptionHandler 
 			NutritionIdExceptionResponse nutritionIdExceptionResponse=new NutritionIdExceptionResponse(ex.getMessage());
 			return new ResponseEntity<Object> (nutritionIdExceptionResponse,HttpStatus.BAD_REQUEST);
 		}
+		/**------------------------------Payment-Exception-Part------------------------------------**/
 		
 		@ExceptionHandler
 		public ResponseEntity<Object> handlePaymentIdNotFoundException(PaymentIdNotFoundException ex, WebRequest request){
@@ -33,9 +34,14 @@ public class CustomResponseEntityHandler extends ResponseEntityExceptionHandler 
 			return new ResponseEntity<Object>(paymentIdNotFoundExceptionResponse,HttpStatus.BAD_REQUEST);
 		}	
 		
+		/**--------------------------------WeightLog-Exception-Part----------------------------------**/
 		
-		
-		
+		@ExceptionHandler
+		public ResponseEntity<Object> handleWeightLogIdException(WeightLogIdException ex,WebRequest request)
+		{
+			WeightLogIdExceptionResponse weightLogIdExceptionResponse=new WeightLogIdExceptionResponse(ex.getMessage());
+			return new ResponseEntity<Object>(weightLogIdExceptionResponse,HttpStatus.BAD_REQUEST);
+		}
 		
 		
 }
