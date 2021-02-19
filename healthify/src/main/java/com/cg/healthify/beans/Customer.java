@@ -84,6 +84,7 @@ public class Customer {
 	 **/
 	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = Exercise.class)
 	private Exercise exercise;
+
 /**
  * ---------------------------OneToMany mapping with WeightLog
  * ----------------
@@ -96,6 +97,15 @@ public class Customer {
 	public List<WeightLog> getWeightLog() {
 	return weightLog;
 }
+
+	
+	/**
+	 *  ----------------------------------OneTOne mapping with CaloriesLog
+	 *-----------------------
+	 **/
+	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = CaloriesLog.class)
+	private CaloriesLog calorieslog;
+
 
 public void setWeightLog(List<WeightLog> weightLog) {
 	this.weightLog = weightLog;
@@ -226,28 +236,23 @@ public void setWeightLog(List<WeightLog> weightLog) {
 	public void setExercise(Exercise exercise) {
 		this.exercise = exercise;
 	}
-
 	
-/*	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", contact=" + contact + ", name=" + name + ", gender=" + gender
-				+ ", customerIdentifier=" + customerIdentifier + ", paymentIdentifier=" + paymentIdentifier
-				+ ", planId=" + planId + ", PTSequence=" + PTSequence + ", dietPlan=" + dietPlan + ", nutritionPlan="
-				+ nutritionPlan + ", payment=" + payment + ", exercise=" + exercise + ", weightLog=" + weightLog
-				+ ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+	public CaloriesLog getCalorieslog() {
+		return calorieslog;
+	}
+
+	public void setCalorieslog(CaloriesLog calorieslog) {
+		this.calorieslog = calorieslog;
 	}
 
 	public Customer(Long id, @NotBlank(message = "Contact Required") String contact,
 			@NotBlank(message = "Name Required") String name, @NotBlank(message = "Gender Required") String gender,
 			@NotBlank(message = "Customer Identifier Reqiured") String customerIdentifier,
 			@NotBlank(message = "Payment Identifier Required") String paymentIdentifier,
-			@NotBlank(message = "Plan Id is Required") String planId, Integer pTSequence, DietPlan dietPlan,
-<<<<<<< HEAD
-			NutritionPlan nutritionPlan, List<Payment> payment, Date createdDate, Date updatedDate,String foodAllergy) {
-=======
+			@NotBlank(message = "Plan Id is Required") String planId,
+			@NotBlank(message = "Food Allergy Required") String foodAllergy, Integer pTSequence, DietPlan dietPlan,
 			NutritionPlan nutritionPlan, List<Payment> payment, Exercise exercise, List<WeightLog> weightLog,
-			Date createdDate, Date updatedDate) {
->>>>>>> branch 'master' of https://github.com/Muppallasrihari/sprint2
+			CaloriesLog calorieslog, Date createdDate, Date updatedDate) {
 		super();
 		this.id = id;
 		this.contact = contact;
@@ -256,22 +261,29 @@ public void setWeightLog(List<WeightLog> weightLog) {
 		this.customerIdentifier = customerIdentifier;
 		this.paymentIdentifier = paymentIdentifier;
 		this.planId = planId;
-		this.foodAllergy=foodAllergy;
+		this.foodAllergy = foodAllergy;
 		PTSequence = pTSequence;
 		this.dietPlan = dietPlan;
 		this.nutritionPlan = nutritionPlan;
 		this.payment = payment;
 		this.exercise = exercise;
 		this.weightLog = weightLog;
+		this.calorieslog = calorieslog;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
-	}*/
+	}
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", contact=" + contact + ", name=" + name + ", gender=" + gender
+				+ ", customerIdentifier=" + customerIdentifier + ", paymentIdentifier=" + paymentIdentifier
+				+ ", planId=" + planId + ", PTSequence=" + PTSequence + ", dietPlan=" + dietPlan + ", nutritionPlan="
+				+ nutritionPlan + ", payment=" + payment + ", exercise=" + exercise + ", weightLog=" + weightLog
+				+ ", calorieslog=" + calorieslog + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate
+				+ "]";
+	}
 	public Customer() {
 		super();
 		
 	}
-	
-	
-
 }
