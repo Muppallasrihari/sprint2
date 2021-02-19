@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.cg.healthify.beans.NutritionPlan;
 
+
+
+
 @Repository
 public interface NutritionPlanRepository extends CrudRepository<NutritionPlan,Integer>{
 

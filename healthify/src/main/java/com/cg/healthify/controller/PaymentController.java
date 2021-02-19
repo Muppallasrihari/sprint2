@@ -12,60 +12,41 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthify.beans.Payment;
 import com.cg.healthify.service.MapValidationErrorService;
-import com.cg.healthify.service.PaymentService;
+import com.cg.healthify.service.PaymentServiceImpl;
 
 
 
 @RestController
+@RequestMapping("/api/payment")
 public class PaymentController {
+@Autowired
+private PaymentServiceImpl paymentServiceImpl;
+@Autowired
+private MapValidationErrorService mapValidationErrorService;
 
-	@Autowired
-	PaymentService paymentService;
 
-	@Autowired
-	MapValidationErrorService mapValidationErrorService;
-
-	//NutritionPlan nutritionPlan = new  NutritionPlan();
-	
-	@PostMapping(value = "/payments")
-	public ResponseEntity<?> savePayment(@Valid @RequestBody Payment payment, BindingResult result) {
-		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
-		if (errorMap != null)
-			return errorMap;
-		Payment pay = paymentService.saveOrUpdate(payment);
-		return new ResponseEntity<Payment>(pay, HttpStatus.CREATED);
-	}
-
-	
-	@PutMapping("/payments")
-	public Payment updatePayment(@RequestBody Payment payment) {
-		return paymentService.saveOrUpdate(payment);
-	}
-
-	@GetMapping("/payments")
-	public Iterable<Payment> getAllPayments() {
-		return paymentService.getAllPayments();
-	}
-
-	@GetMapping("/payment/{id}")
-	public ResponseEntity<Payment> findPaymentById(@PathVariable("id") Long id) {
-		Payment payment = paymentService.findPaymentById(id);
-		/*if (payment == null) {
-			throw new Payment("Invalid ID" + id);
-		}*/
-		return new ResponseEntity<Payment>(payment, HttpStatus.OK);
-		
-	}
-
-	@DeleteMapping("/payment/{id}")
-	public void deletePayment(@PathVariable("id") Long id) {
-		paymentService.deletePayment(id);
-	}
-
+@PostMapping("/{paymentIdentifier}")
+public ResponseEntity<?> addAndUpdatePayment(@Valid @RequestBody Payment payment,BindingResult result,@PathVariable String paymentIdentifier){
+	ResponseEntity<?> errorMsg=mapValidationErrorService.mapValidationError(result);
+	if(errorMsg!=null) return errorMsg;	
+	Payment payment1=paymentServiceImpl.addPayment(paymentIdentifier, payment);
+	return new ResponseEntity<Payment>(payment1,HttpStatus.OK);
 }
+
+	@GetMapping("/{transactionId}")
+	public Payment getPaymentDetails(@PathVariable String transactionId){ 
+		return paymentServiceImpl.findPaymentByTransactionId(transactionId);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> DeletePaymentById(@PathVariable Long id){
+		 paymentServiceImpl.deletePaymentByTransactionId(id);
+		return new ResponseEntity<String>("Payment having Transaction ID: "+id+" is deleted.",HttpStatus.OK);
+	}
+	}

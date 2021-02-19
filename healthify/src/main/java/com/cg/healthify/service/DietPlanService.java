@@ -6,11 +6,8 @@ import com.cg.healthify.beans.DietPlan;
 
 @Service
 public interface DietPlanService {
+	public DietPlan saveDietPlan(DietPlan dietPlan);
+	public DietPlan getDietPlanById(String customerIdentifier);
+	public Iterable<DietPlan>getAllDietDetails();
 	
-public DietPlan saveDietPlan(DietPlan dietPlan);
-
-public DietPlan getDietPlanById(String customerIdentifier);
-
-public Iterable<DietPlan>getAllDietDetails();
-
 }

@@ -22,14 +22,14 @@ public class DietPlanServiceImpl implements DietPlanService{
 		try {
 			System.out.println("-----------------------"+dietPlan.getFoodType());
 			if(dietPlan.getFoodType().equalsIgnoreCase("Veg")){
-				dietPlan.setCarbProtien(10.0);
+				dietPlan.setCarbs(10.0);
 				dietPlan.setFatProtien(7.0);
-				dietPlan.setTotalProtien(dietPlan.getCarbProtien()+dietPlan.getFatProtien());
+				dietPlan.setTotalProtien(dietPlan.getCarbs()+dietPlan.getFatProtien());
 			}
 			if(dietPlan.getFoodType().equalsIgnoreCase("NonVeg")){
-				dietPlan.setCarbProtien(20.0);
+				dietPlan.setCarbs(20.0);
 				dietPlan.setFatProtien(11.0);
-				dietPlan.setTotalProtien(dietPlan.getCarbProtien()+dietPlan.getFatProtien());
+				dietPlan.setTotalProtien(dietPlan.getCarbs()+dietPlan.getFatProtien());
 			}
 			Customer customer=new Customer();
 			if(customer.getCustomerIdentifier()!=null) {

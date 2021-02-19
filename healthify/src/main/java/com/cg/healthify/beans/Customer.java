@@ -1,4 +1,5 @@
 package com.cg.healthify.beans;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,28 +26,35 @@ public class Customer {
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 private Long id;
 @NotBlank(message="Contact Required")
-@Size(max=10,min=10,message="Phone number must be 10 digits")
-@Column(unique=true)
+//@Size(max=10,min=10,message="Phone number must be 10 digits")
+//@Column(unique=true)
 private String contact;
 @NotBlank(message="Name Required")
 private String name;
 @NotBlank(message="Gender Required")
 private String gender;
+//@NotBlank(message="Nutrition-Plan Name Required")
+//private String nutritionName;
 @NotBlank(message="Customer Identifier Reqiured")
 @Column(unique=true,updatable=false)
 private String customerIdentifier;
 @NotBlank(message="Payment Identifier Required")
+@Column(unique=true,updatable=false)
 private String paymentIdentifier;
+@NotBlank(message="Plan Id is Required")
+private String planId;
 private Integer PTSequence = 0;
 
-/**----------------------------------OneToOne mapping with DietPlan-------------------------**/
+/**----------------------------------OneToOne mapping with NutritionPLan-------------------------**/
 @OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL,mappedBy="customer")
 private DietPlan dietPlan;
 
+@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity=NutritionPlan.class)
+private NutritionPlan nutritionPlan;
+
 /**----------------------------------OneToMany mapping with Payment-----------------------**/
-//@OneToMany(targetEntity = Payment.class)
-//@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL , mappedBy = "customer")
-//private List<Payment> payment;
+@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL , mappedBy = "customer")
+private List<Payment> payment=new ArrayList<>();
 
 @Column(updatable=false)
 private Date createdDate;
@@ -60,66 +68,4 @@ public void onCreate() {
 public void onUpdate() {
 	this.updatedDate=new Date();
 }
-public Long getId() {
-	return id;
-}
-public void setId(Long id) {
-	this.id = id;
-}
-public String getContact() {
-	return contact;
-}
-public void setContact(String contact) {
-	this.contact = contact;
-}
-public String getName() {
-	return name;
-}
-public void setName(String name) {
-	this.name = name;
-}
-public String getGender() {
-	return gender;
-}
-public void setGender(String gender) {
-	this.gender = gender;
-}
-public String getCustomerIdentifier() {
-	return customerIdentifier;
-}
-public void setCustomerIdentifier(String customerIdentifier) {
-	this.customerIdentifier = customerIdentifier;
-}
-public String getPaymentIdentifier() {
-	return paymentIdentifier;
-}
-public void setPaymentIdentifier(String paymentIdentifier) {
-	this.paymentIdentifier = paymentIdentifier;
-}
-public Integer getPTSequence() {
-	return PTSequence;
-}
-public void setPTSequence(Integer pTSequence) {
-	PTSequence = pTSequence;
-}
-public DietPlan getDietPlan() {
-	return dietPlan;
-}
-public void setDietPlan(DietPlan dietPlan) {
-	this.dietPlan = dietPlan;
-}
-public Date getCreatedDate() {
-	return createdDate;
-}
-public void setCreatedDate(Date createdDate) {
-	this.createdDate = createdDate;
-}
-public Date getUpdatedDate() {
-	return updatedDate;
-}
-public void setUpdatedDate(Date updatedDate) {
-	this.updatedDate = updatedDate;
-}
-
-
 }

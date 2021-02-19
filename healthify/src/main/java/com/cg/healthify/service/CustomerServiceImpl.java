@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.cg.healthify.beans.Customer;
 import com.cg.healthify.beans.DietPlan;
+import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.exceptions.CustomerException;
 import com.cg.healthify.repository.CustomerRepository;
 import com.cg.healthify.repository.DietPlanRepository;
+import com.cg.healthify.repository.NutritionPlanRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -16,12 +18,15 @@ public class CustomerServiceImpl implements CustomerService{
 private CustomerRepository customerRepository;
 @Autowired
 private DietPlanRepository dietPlanRepository;
+@Autowired
+private NutritionPlanRepository nutritionPlanRepository;
 
 /**-----------------------------Create Customer Data Along with Connected Entities----------**/
 @Override
 public Customer save(Customer customer) {
 	try {
 		customer.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());
+		NutritionPlan plan=nutritionPlanRepository.findByPlanId(customer.getPlanId().toUpperCase());
 	  if(customer.getId()==null) {
 		DietPlan dietPlan=new DietPlan();
 		dietPlan.setFoodType("Veg");
@@ -33,11 +38,14 @@ public Customer save(Customer customer) {
 		customer.setDietPlan(dietPlanRepository.findByCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase()));
 			
 	 }
-	 return customerRepository.save(customer);
+	 if(plan!=null) {
+		 customer.setNutritionPlan(plan);
+	 }
 	}
 	catch(Exception e) {
 		throw new CustomerException("Contact: "+customer.getContact()+" already exists");
 	}
+	return customerRepository.save(customer);
 	}
 /**----------------------------------------------------------------------------------------**/
 

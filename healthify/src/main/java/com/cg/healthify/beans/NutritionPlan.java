@@ -35,6 +35,10 @@ public class NutritionPlan {
 	@Min(value = 0)
 	private double price;
 
+	// @OneToOne(fetch=FetchType.EAGER)
+	// @JoinColumn(name="id",nullable=false)
+	// @JsonIgnore
+	// private Payment payment;
 
 	public NutritionPlan() {
 		super();
