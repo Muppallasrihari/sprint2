@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+
 @ControllerAdvice
 @RestController
 public class CustomResponseEntityHandler extends ResponseEntityExceptionHandler {
@@ -32,6 +33,12 @@ public class CustomResponseEntityHandler extends ResponseEntityExceptionHandler 
 			PaymentIdNotFoundExceptionResponse paymentIdNotFoundExceptionResponse =  new PaymentIdNotFoundExceptionResponse(ex.getMessage());
 			return new ResponseEntity<Object>(paymentIdNotFoundExceptionResponse,HttpStatus.BAD_REQUEST);
 		}	
+		
+		@ExceptionHandler
+		public ResponseEntity<Object> handleCaloriesLogIdException(CaloriesLogIdException ex,WebRequest request){
+			CaloriesLogIdExceptionResponse caloriesLogIdExceptionResponse=new CaloriesLogIdExceptionResponse(ex.getMessage());
+			return new ResponseEntity<Object>(caloriesLogIdExceptionResponse,HttpStatus.BAD_REQUEST);
+		}
 		
 		
 		
