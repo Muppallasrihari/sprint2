@@ -59,6 +59,14 @@ public class Customer {
 	 **/
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Payment> payment = new ArrayList<>();
+	
+	/**
+	 *  ----------------------------------OneTOne mapping with Exercise
+	 *-----------------------
+	 **/
+	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = Exercise.class)
+	private Exercise exercise;
+
 
 	@Column(updatable = false)
 	private Date createdDate;
@@ -177,13 +185,21 @@ public class Customer {
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
+	
+	public Exercise getExercise() {
+		return exercise;
+	}
+
+	public void setExercise(Exercise exercise) {
+		this.exercise = exercise;
+	}
 
 	public Customer(Long id, @NotBlank(message = "Contact Required") String contact,
 			@NotBlank(message = "Name Required") String name, @NotBlank(message = "Gender Required") String gender,
 			@NotBlank(message = "Customer Identifier Reqiured") String customerIdentifier,
 			@NotBlank(message = "Payment Identifier Required") String paymentIdentifier,
 			@NotBlank(message = "Plan Id is Required") String planId, Integer pTSequence, DietPlan dietPlan,
-			NutritionPlan nutritionPlan, List<Payment> payment, Date createdDate, Date updatedDate) {
+			NutritionPlan nutritionPlan, List<Payment> payment, Exercise exercise, Date createdDate, Date updatedDate) {
 		super();
 		this.id = id;
 		this.contact = contact;
@@ -196,12 +212,9 @@ public class Customer {
 		this.dietPlan = dietPlan;
 		this.nutritionPlan = nutritionPlan;
 		this.payment = payment;
+		this.exercise = exercise;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
-	}
-
-	public Customer() {
-		super();
 	}
 
 	@Override
@@ -209,8 +222,15 @@ public class Customer {
 		return "Customer [id=" + id + ", contact=" + contact + ", name=" + name + ", gender=" + gender
 				+ ", customerIdentifier=" + customerIdentifier + ", paymentIdentifier=" + paymentIdentifier
 				+ ", planId=" + planId + ", PTSequence=" + PTSequence + ", dietPlan=" + dietPlan + ", nutritionPlan="
-				+ nutritionPlan + ", payment=" + payment + ", createdDate=" + createdDate + ", updatedDate="
-				+ updatedDate + "]";
+				+ nutritionPlan + ", payment=" + payment + ", exercise=" + exercise + ", createdDate=" + createdDate
+				+ ", updatedDate=" + updatedDate + "]";
 	}
+
+	public Customer() {
+		super();
+		
+	}
+	
+	
 
 }

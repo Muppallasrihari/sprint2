@@ -33,9 +33,6 @@ public class Exercise {
 	@Column(updatable = false, unique = true)
 	private String exIdentifier;
 	
-	@NotBlank
-	private String exType;
-	
 	@NotNull
 	@Range(min=1,max=10,message="set range should be within 1 to 10 ")
 	private int exSets;
@@ -43,11 +40,6 @@ public class Exercise {
 	@NotNull
 	@Range(min=1,max=40,message="rep range should be within 1 to 40 ")
 	private int exReps;
-	
-	@NotBlank
-	private String exPlan;
-	
-	//-------------------------------------------------------------------------------
 	
 	@ElementCollection
 	@CollectionTable(name="ExercisePlans")
@@ -61,9 +53,6 @@ public class Exercise {
 		this.exPlans = exPlans;
 	}
 	
-	
-	
-	//--------------------------------------------------------------------------------
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date created_At;
@@ -83,12 +72,7 @@ public class Exercise {
 	public void setExIdentifier(String exIdentifier) {
 		this.exIdentifier = exIdentifier;
 	}
-	public String getExType() {
-		return exType;
-	}
-	public void setExType(String exType) {
-		this.exType = exType;
-	}
+	
 	public int getExSets() {
 		return exSets;
 	}
@@ -101,12 +85,7 @@ public class Exercise {
 	public void setExReps(int exReps) {
 		this.exReps = exReps;
 	}
-	public String getExPlan() {
-		return exPlan;
-	}
-	public void setExPlan(String exPlan) {
-		this.exPlan = exPlan;
-	}
+	
 	public Date getCreated_At() {
 		return created_At;
 	}
