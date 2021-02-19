@@ -29,6 +29,7 @@ public class WeightLogServiceImpl implements WeightLogService{
 		try
 		{
 			weightLog.setWeightId(weightLog.getWeightId().toUpperCase());
+			
 			return weightLogRepository.save(weightLog);
 		}
 		catch(Exception e)
