@@ -97,8 +97,6 @@ public class Customer {
 	public List<WeightLog> getWeightLog() {
 	return weightLog;
 }
-
-	
 	/**
 	 *  ----------------------------------OneTOne mapping with CaloriesLog
 	 *-----------------------
