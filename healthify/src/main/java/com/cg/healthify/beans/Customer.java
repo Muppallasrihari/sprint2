@@ -41,15 +41,30 @@ public class Customer {
 	private String paymentIdentifier;
 	@NotBlank(message = "Plan Id is Required")
 	private String planId;
+	@NotBlank(message = "Food Allergy Required")
+	private String foodAllergy;
+	public String getFoodAllergy() {
+		return foodAllergy;
+	}
+
+	public void setFoodAllergy(String foodAllergy) {
+		this.foodAllergy = foodAllergy;
+	}
+
 	private Integer PTSequence = 0;
 
 	/**
 	 * ----------------------------------OneToOne mapping with
-	 * NutritionPLan-------------------------
+	 * DietPlan-------------------------
 	 **/
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "customer")
 	private DietPlan dietPlan;
-
+	
+	/**
+	 * ----------------------------------OneToOne mapping with
+	 * NutritionPLan-------------------------
+	 **/
+	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = NutritionPlan.class)
 	private NutritionPlan nutritionPlan;
 
@@ -183,7 +198,7 @@ public class Customer {
 			@NotBlank(message = "Customer Identifier Reqiured") String customerIdentifier,
 			@NotBlank(message = "Payment Identifier Required") String paymentIdentifier,
 			@NotBlank(message = "Plan Id is Required") String planId, Integer pTSequence, DietPlan dietPlan,
-			NutritionPlan nutritionPlan, List<Payment> payment, Date createdDate, Date updatedDate) {
+			NutritionPlan nutritionPlan, List<Payment> payment, Date createdDate, Date updatedDate,String foodAllergy) {
 		super();
 		this.id = id;
 		this.contact = contact;
@@ -192,6 +207,7 @@ public class Customer {
 		this.customerIdentifier = customerIdentifier;
 		this.paymentIdentifier = paymentIdentifier;
 		this.planId = planId;
+		this.foodAllergy=foodAllergy;
 		PTSequence = pTSequence;
 		this.dietPlan = dietPlan;
 		this.nutritionPlan = nutritionPlan;

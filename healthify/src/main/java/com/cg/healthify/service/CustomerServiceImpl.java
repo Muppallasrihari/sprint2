@@ -28,15 +28,30 @@ public Customer save(Customer customer) {
 		customer.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());
 		NutritionPlan plan=nutritionPlanRepository.findByPlanId(customer.getPlanId().toUpperCase());
 	  if(customer.getId()==null) {
+/**----------------------------Diet-Plan-Section----------------------------------------------**/		  
 		DietPlan dietPlan=new DietPlan();
-		dietPlan.setFoodType("Veg");
+		dietPlan.setFoodType(customer.getFoodAllergy());
+		if(dietPlan.getFoodType().equalsIgnoreCase("NonVeg")){
+			dietPlan.setFoodType("Veg");
+			dietPlan.setProteinRatio(5.5);
+			dietPlan.setFatRatio(10.0);
+			dietPlan.setCarbsRatio(7.0);
+			dietPlan.setTotal(dietPlan.getProteinRatio()+dietPlan.getFatRatio()+dietPlan.getCarbsRatio());
+		}
+		if(dietPlan.getFoodType().equalsIgnoreCase("Veg")){
+			dietPlan.setFoodType("NonVeg");
+			dietPlan.setProteinRatio(6.5);
+			dietPlan.setFatRatio(20.0);
+			dietPlan.setCarbsRatio(11.0);
+			dietPlan.setTotal(dietPlan.getProteinRatio()+dietPlan.getFatRatio()+dietPlan.getCarbsRatio());
+		}
 		customer.setDietPlan(dietPlan);
 		dietPlan.setCustomer(customer);
 		dietPlan.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());
 }
 	 if(customer.getId()!=null) {
 		customer.setDietPlan(dietPlanRepository.findByCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase()));
-			
+/**--------------------------------------------------------------------------------------------------------------------**/			
 	 }
 	 if(plan!=null) {
 		 customer.setNutritionPlan(plan);

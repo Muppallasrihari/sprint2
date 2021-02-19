@@ -21,9 +21,10 @@ private Long id;
 @Column(unique=true,updatable=false)
 private String customerIdentifier;
 private String foodType;
-private double carbs;
-private double fatProtien;
-private double totalProtien;
+private Double fatRatio;
+private Double carbsRatio;
+private Double proteinRatio;
+private Double total;
 @OneToOne(fetch=FetchType.EAGER)
 @JoinColumn(name="id",nullable=false)
 @JsonIgnore
@@ -46,23 +47,30 @@ public String getFoodType() {
 public void setFoodType(String foodType) {
 	this.foodType = foodType;
 }
-public double getCarbs() {
-	return carbs;
+
+public Double getFatRatio() {
+	return fatRatio;
 }
-public void setCarbs(double carbs) {
-	this.carbs = carbs;
+public void setFatRatio(Double fatRatio) {
+	this.fatRatio = fatRatio;
 }
-public double getFatProtien() {
-	return fatProtien;
+public Double getCarbsRatio() {
+	return carbsRatio;
 }
-public void setFatProtien(double fatProtien) {
-	this.fatProtien = fatProtien;
+public void setCarbsRatio(Double carbsRatio) {
+	this.carbsRatio = carbsRatio;
 }
-public double getTotalProtien() {
-	return totalProtien;
+public Double getProteinRatio() {
+	return proteinRatio;
 }
-public void setTotalProtien(double totalProtien) {
-	this.totalProtien = totalProtien;
+public void setProteinRatio(Double proteinRatio) {
+	this.proteinRatio = proteinRatio;
+}
+public Double getTotal() {
+	return total;
+}
+public void setTotal(Double total) {
+	this.total = total;
 }
 public Customer getCustomer() {
 	return customer;
