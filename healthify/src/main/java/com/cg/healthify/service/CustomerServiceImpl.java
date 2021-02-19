@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 
 import com.cg.healthify.beans.Customer;
 import com.cg.healthify.beans.DietPlan;
+import com.cg.healthify.beans.Exercise;
 import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.exceptions.CustomerException;
 import com.cg.healthify.repository.CustomerRepository;
 import com.cg.healthify.repository.DietPlanRepository;
+import com.cg.healthify.repository.ExerciseRepository;
 import com.cg.healthify.repository.NutritionPlanRepository;
 
 @Service
@@ -20,6 +22,8 @@ private CustomerRepository customerRepository;
 private DietPlanRepository dietPlanRepository;
 @Autowired
 private NutritionPlanRepository nutritionPlanRepository;
+@Autowired
+private ExerciseRepository exerciseRepository;
 
 /**-----------------------------Create Customer Data Along with Connected Entities----------**/
 @Override
@@ -27,6 +31,10 @@ public Customer save(Customer customer) {
 	try {
 		customer.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());
 		NutritionPlan plan=nutritionPlanRepository.findByPlanId(customer.getPlanId().toUpperCase());
+		Exercise exercise = exerciseRepository.findByExIdentifier(customer.getPlanId().toUpperCase());
+ 
+
+		
 	  if(customer.getId()==null) {
 /**----------------------------Diet-Plan-Section----------------------------------------------**/		  
 		DietPlan dietPlan=new DietPlan();
@@ -55,6 +63,7 @@ public Customer save(Customer customer) {
 	 }
 	 if(plan!=null) {
 		 customer.setNutritionPlan(plan);
+		 customer.setExercise(exercise);
 	 }
 	}
 	catch(Exception e) {

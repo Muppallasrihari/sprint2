@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class WeightLog {
-	
+
 	public WeightLog() {
 		super();
 	}
@@ -50,7 +50,7 @@ public class WeightLog {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * @param WeightId
 	 * It must not be empty
