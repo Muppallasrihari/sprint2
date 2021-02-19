@@ -15,5 +15,7 @@ public interface PaymentService {
 	public void deletePaymentByTransactionId(Long id);
 
 	public List<Payment> getAllPayments();
+	
+	
 
 }

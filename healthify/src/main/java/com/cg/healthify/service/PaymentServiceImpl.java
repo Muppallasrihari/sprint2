@@ -1,5 +1,7 @@
 package com.cg.healthify.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,7 @@ private CustomerRepository customerRepository;
 private PaymentRepository paymentRepository;
 Integer PTSsequence=0;
 String paymentTransactionId;
-
+@Override
 public Payment addPayment(String paymentIdentifier, Payment payment) {
 	try {	
 	Customer customer=customerRepository.findByPaymentIdentifier(paymentIdentifier);
@@ -47,6 +49,7 @@ public Payment addPayment(String paymentIdentifier, Payment payment) {
 	throw new PaymentIdNotFoundException("Specified Payment is not there, Please check your input");
 	}
 }
+@Override
 public Payment findPaymentByTransactionId(String transactionId) {
 	Payment pay=paymentRepository.findByTransactionId(transactionId);
 	if(pay==null) {
@@ -55,8 +58,15 @@ public Payment findPaymentByTransactionId(String transactionId) {
 	return pay;
 }
 
+@Override
 public void deletePaymentByTransactionId(Long id) {
 	 paymentRepository.deleteById(1L);
 	
 }
+@Override
+public List<Payment> getAllPayments() {
+	return paymentRepository.findAll();
+	
+}
+
 }

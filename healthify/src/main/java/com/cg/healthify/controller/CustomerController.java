@@ -43,7 +43,7 @@ private MapValidationErrorService mapValidationErrorService;
 		return new ResponseEntity<Customer>(cust,HttpStatus.OK);
 	}
 	@GetMapping("/all")
-	public Iterable<Customer> getAllProjects(){
+	public Iterable<Customer> getAllCustomer(){
 		return customerService.getAllCustomerDetails();
 	}
 	@DeleteMapping("/{customerIdentifier}")
