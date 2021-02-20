@@ -1,6 +1,8 @@
 package com.cg.healthify.beans;
 
-import java.util.Date;
+
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +14,6 @@ import javax.persistence.PreUpdate;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -28,21 +29,32 @@ public class NutritionPlan {
 	@NotBlank(message = "Nutrition Plan Description is required.")
 	private String description;
 	@JsonFormat
-	private Date createdAt;
+	private LocalDateTime createdAt;
 	@JsonFormat
-	private Date updatedAt;
+	private LocalDateTime updatedAt;
 	@NotNull(message = "Nutrition Plan Price is required.")
 	@Min(value = 0)
 	private double price;
 
-	// @OneToOne(fetch=FetchType.EAGER)
-	// @JoinColumn(name="id",nullable=false)
-	// @JsonIgnore
-	// private Payment payment;
-
 	public NutritionPlan() {
 		super();
 	}
+	
+
+	public NutritionPlan(Long id, @NotBlank(message = "Nutrition Plan Id is required.") String planId,
+			@NotBlank(message = "Nutrition Plan Name is required.") String name,
+			@NotBlank(message = "Nutrition Plan Description is required.") String description, LocalDateTime createdAt,
+			LocalDateTime updatedAt, @NotNull(message = "Nutrition Plan Price is required.") @Min(0) double price) {
+		super();
+		this.id = id;
+		this.planId = planId;
+		this.name = name;
+		this.description = description;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.price = price;
+	}
+
 
 	public String getPlanId() {
 		return planId;
@@ -76,19 +88,19 @@ public class NutritionPlan {
 		this.description = description;
 	}
 
-	public Date getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt() {
+	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
@@ -102,14 +114,22 @@ public class NutritionPlan {
 
 	@PrePersist
 	public void onCreate() {
-		this.createdAt = new Date();
+		this.createdAt = LocalDateTime.now();
 
-		this.createdAt = new Date();
 	}
 
 	@PreUpdate
 	public void onUpdate() {
-		this.updatedAt = new Date();
+		this.updatedAt = LocalDateTime.now();
 	}
+
+
+	@Override
+	public String toString() {
+		return "NutritionPlan [id=" + id + ", planId=" + planId + ", name=" + name + ", description=" + description
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", price=" + price + "]";
+	}
+	
+	
 
 }
