@@ -34,6 +34,9 @@ public class Exercise {
 	@Column(updatable = false, unique = true)
 	private String exIdentifier;
 	
+	@NotBlank
+	private String exType;
+			
 	@NotNull
 	@Range(min=1,max=10,message="set range should be within 1 to 10 ")
 	private int exSets;
@@ -45,15 +48,6 @@ public class Exercise {
 	@ElementCollection
 	@CollectionTable(name="ExercisePlans")
 	private Collection<String> exPlans = new ArrayList<>();
-	
-	
-	public Collection<String> getExPlans() {
-		return exPlans;
-	}
-	public void setExPlans(Collection<String> exPlans) {
-		this.exPlans = exPlans;
-	}
-	
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime created_At;
@@ -109,5 +103,48 @@ public class Exercise {
 	public void onUpdate() {
 		this.updated_At = LocalDateTime.now();
 	}
+	
+	public Collection<String> getExPlans() {
+		return exPlans;
+	}
+	public void setExPlans(Collection<String> exPlans) {
+		this.exPlans = exPlans;
+	}
+	
+	public String getExType() {
+		return exType;
+	}
+	public void setExType(String exType) {
+		this.exType = exType;
+	}
+	public Exercise(int id,
+			@NotBlank(message = "Exercise Identifier should not be blank") @Size(min = 3, max = 10, message = "Please use 3 to 10 charecters") String exIdentifier,
+			@NotBlank String exType,
+			@NotNull @Range(min = 1, max = 10, message = "set range should be within 1 to 10 ") int exSets,
+			@NotNull @Range(min = 1, max = 40, message = "rep range should be within 1 to 40 ") int exReps,
+			Collection<String> exPlans, LocalDateTime created_At, LocalDateTime updated_At) {
+		super();
+		this.id = id;
+		this.exIdentifier = exIdentifier;
+		this.exType = exType;
+		this.exSets = exSets;
+		this.exReps = exReps;
+		this.exPlans = exPlans;
+		this.created_At = created_At;
+		this.updated_At = updated_At;
+	}
+	public Exercise() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Exercise [id=" + id + ", exIdentifier=" + exIdentifier + ", exType=" + exType + ", exSets=" + exSets
+				+ ", exReps=" + exReps + ", exPlans=" + exPlans + ", created_At=" + created_At + ", updated_At="
+				+ updated_At + "]";
+	}
+	
+	
+	
+	
 
 }

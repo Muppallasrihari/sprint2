@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.beans.Payment;
 import com.cg.healthify.service.MapValidationErrorService;
 import com.cg.healthify.service.PaymentServiceImpl;
 
 @RestController
-@RequestMapping("/api/payment")
+@RequestMapping("/payment")
 public class PaymentController {
 	@Autowired
 	private PaymentServiceImpl paymentServiceImpl;
@@ -45,8 +44,8 @@ public class PaymentController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> DeletePaymentById(@PathVariable Long id) {
-		paymentServiceImpl.deletePaymentByTransactionId(id);
+	public ResponseEntity<?> DeletePaymentById(@PathVariable String id) {
+		paymentServiceImpl.deletePaymentById(id);
 		return new ResponseEntity<String>("Payment having Transaction ID: " + id + " is deleted.", HttpStatus.OK);
 	}
 

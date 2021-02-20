@@ -12,7 +12,7 @@ public interface PaymentService {
 
 	public Payment findPaymentByTransactionId(String transactionId);
 
-	public void deletePaymentByTransactionId(Long id);
+	public int deletePaymentById(String transactionId);
 
 	public List<Payment> getAllPayments();
 	
