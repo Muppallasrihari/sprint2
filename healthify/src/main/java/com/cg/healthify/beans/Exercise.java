@@ -36,9 +36,7 @@ public class Exercise {
 	
 	@NotBlank
 	private String exType;
-	
-	private String check;
-		
+			
 	@NotNull
 	@Range(min=1,max=10,message="set range should be within 1 to 10 ")
 	private int exSets;
