@@ -25,7 +25,7 @@ public class PaymentServiceImpl implements PaymentService {
 	public Payment addPayment(String paymentIdentifier, Payment payment) {
 		try {
 			Customer customer = customerRepository.findByPaymentIdentifier(paymentIdentifier);
-			String planCategory = customer.getPlanId();
+			String planCategory = payment.getPaymentGateway();
 			Double price = customer.getNutritionPlan().getPrice();
 			if (payment.getId() == null) {
 				paymentTransactionId = payment.getTransactionId();
