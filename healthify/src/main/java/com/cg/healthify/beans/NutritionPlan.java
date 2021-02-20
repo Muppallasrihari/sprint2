@@ -1,7 +1,5 @@
 package com.cg.healthify.beans;
 
-
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
