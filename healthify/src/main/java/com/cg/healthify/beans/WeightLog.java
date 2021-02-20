@@ -1,8 +1,6 @@
 package com.cg.healthify.beans;
 
-
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,16 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.UniqueConstraint;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
 /**
  * Pojo class= WeightLog
+ * 
  * @author vinotraj
  *
  */
@@ -30,9 +26,10 @@ public class WeightLog {
 	public WeightLog() {
 		super();
 	}
+
 	public WeightLog(Long id,
 			@NotBlank(message = "weightId Required") @Size(min = 2, max = 4, message = "Must be between the size(min=2 ,max=4)") String weightId,
-			@NotBlank(message = "weight Required") String weight, Date created_At, Date updated_At) {
+			@NotBlank(message = "weight Required") String weight, LocalDateTime created_At, LocalDateTime updated_At) {
 		super();
 		this.id = id;
 		this.weightId = weightId;
@@ -42,82 +39,85 @@ public class WeightLog {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * @param WeightId
-	 * It must not be empty
-	 * size of the string between 2 to 4
-	 * weightId must be unique.
+	 * @param WeightId It must not be empty size of the string between 2 to 4
+	 *                 weightId must be unique.
 	 */
-	@NotBlank(message="weightId Required")
-	@Size(min=2,max=4,message="Must be between the size(min=2 ,max=4)")
-	@Column(unique = true,updatable = false)
+	@NotBlank(message = "weightId Required")
+	@Size(min = 2, max = 4, message = "Must be between the size(min=2 ,max=4)")
+	@Column(unique = true, updatable = false)
 
 	private String weightId;
 
 	/**
-	 * @param weight
-	 * It must not be empty
+	 * @param weight It must not be empty
 	 * 
 	 */
-	@NotBlank(message="weight Required")
+	@NotBlank(message = "weight Required")
 	private String weight;
 
 	/**
-	 * @param created_At
-	 * Date must be in json format
+	 * @param created_At Date must be in json format
 	 */
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date created_At;
+	private LocalDateTime created_At;
 
 	/**
-	 * @param updated_At
-	 * Date must be json format
+	 * @param updated_At Date must be json format
 	 */
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date Updated_At;
+	private LocalDateTime Updated_At;
 
 	public String getWeight() {
 		return weight;
 	}
+
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
+
 	public String getWeightId() {
 		return weightId;
 	}
+
 	public void setWeightId(String weightId) {
 		this.weightId = weightId;
 	}
-	public Date getCreated_At() {
+
+	public LocalDateTime getCreated_At() {
 		return created_At;
 	}
-	public void setCreated_At(Date created_At) {
+
+	public void setCreated_At(LocalDateTime created_At) {
 		this.created_At = created_At;
 	}
-	public Date getUpdated_At() {
+
+	public LocalDateTime getUpdated_At() {
 		return Updated_At;
 	}
-	public void setUpdated_At(Date updated_At) {
+
+	public void setUpdated_At(LocalDateTime updated_At) {
 		Updated_At = updated_At;
 	}
 
 	@PrePersist
-	public void onCreate()
-	{
-		this.created_At=new Date();
+	public void onCreate() {
+		this.created_At = LocalDateTime.now();
 	}
+
 	@PreUpdate
-	public void onUpdate()
-	{
-		this.Updated_At=new Date();
+	public void onUpdate() {
+		this.Updated_At = LocalDateTime.now();
 	}
 }

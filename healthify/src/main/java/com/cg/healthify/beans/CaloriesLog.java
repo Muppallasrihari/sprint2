@@ -1,7 +1,6 @@
 package com.cg.healthify.beans;
 
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,10 +33,10 @@ public class CaloriesLog {
 	private String caloriesLogIdentifier;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date createdAt;
+	private LocalDateTime createdAt;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date updatedAt;
+	private LocalDateTime updatedAt;
 	
 	
 	
@@ -46,7 +45,7 @@ public class CaloriesLog {
 		
 	}
 
-	public CaloriesLog(Long id, int calories, String caloriesLogIdentifier,Date createdAt, Date updatedAt) {
+	public CaloriesLog(Long id, int calories, String caloriesLogIdentifier,LocalDateTime createdAt, LocalDateTime updatedAt) {
 		super();
 		this.id = id;
 		this.calories = calories;
@@ -73,27 +72,27 @@ public class CaloriesLog {
 	public void setCaloriesLogIdentifier(String caloriesLogIdentifier) {
 		this.caloriesLogIdentifier = caloriesLogIdentifier;
 	}
-	public Date getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Date getUpdatedAt() {
+	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	
 	@PrePersist
 	public void onCreate() {
-  	this.createdAt=new Date();
+  	this.createdAt=LocalDateTime.now();
     }
 	
     @PreUpdate
     public void onUpdate() {
-    this.updatedAt=new Date();
+    this.updatedAt=LocalDateTime.now();
     }
     @Override
 	public String toString() {
