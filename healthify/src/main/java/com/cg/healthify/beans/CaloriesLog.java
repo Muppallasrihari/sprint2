@@ -38,8 +38,6 @@ public class CaloriesLog {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDateTime updatedAt;
 	
-	
-	
 	public CaloriesLog() {
 		super();
 		
