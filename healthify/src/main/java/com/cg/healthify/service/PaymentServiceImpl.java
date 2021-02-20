@@ -11,7 +11,6 @@ import com.cg.healthify.exceptions.PaymentIdNotFoundException;
 import com.cg.healthify.repository.CustomerRepository;
 import com.cg.healthify.repository.PaymentRepository;
 
-
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -26,7 +25,8 @@ public class PaymentServiceImpl implements PaymentService {
 	public Payment addPayment(String paymentIdentifier, Payment payment) {
 		try {
 			Customer customer = customerRepository.findByPaymentIdentifier(paymentIdentifier);
-			//System.out.println(payment.getId());
+			String planCategory = customer.getPlanId();
+			Double price = customer.getNutritionPlan().getPrice();
 			if (payment.getId() == null) {
 				paymentTransactionId = payment.getTransactionId();
 				PTSsequence++;
@@ -35,6 +35,15 @@ public class PaymentServiceImpl implements PaymentService {
 				customer.setPaymentIdentifier(paymentIdentifier);
 				payment.setPaymentIdentifier(paymentIdentifier);
 				payment.setCustomer(customer);
+				if (planCategory.equalsIgnoreCase("UPI")) {
+					payment.setDiscount(10.0);
+					Double amount = price - (payment.getDiscount() * 10);
+					payment.setActualAmount(amount);
+				} else if (planCategory.equalsIgnoreCase("Card")) {
+					payment.setDiscount(5.0);
+					Double amount = price - (payment.getDiscount() * 10);
+					payment.setActualAmount(amount);
+				}
 			}
 			if (payment.getId() != null) {
 				payment.setTransactionId(paymentTransactionId);
@@ -59,17 +68,16 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Override
 	public int deletePaymentById(String transactionId) {
-		int result=0;
+		int result = 0;
 		Payment payment = paymentRepository.findByTransactionId(transactionId);
 		if (payment == null) {
 			throw new PaymentIdNotFoundException("Pay Id:" + transactionId + " not found");
-		}
-		else {
+		} else {
 			result = 1;
 			paymentRepository.delete(payment);
-			
+
 		}
-		
+
 		return result;
 
 	}
