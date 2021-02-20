@@ -1,7 +1,8 @@
 package com.cg.healthify.beans;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,8 +17,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -68,7 +67,7 @@ public class Customer {
 	 * NutritionPLan-------------------------
 	 **/
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = NutritionPlan.class)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, targetEntity = NutritionPlan.class)
 	private NutritionPlan nutritionPlan;
 
 	/**
@@ -112,17 +111,17 @@ public void setWeightLog(List<WeightLog> weightLog) {
 }
 
 	@Column(updatable = false)
-	private Date createdDate;
-	private Date updatedDate;
+	private LocalDateTime createdDate;
+	private LocalDateTime updatedDate;
 
 	@PrePersist
 	public void onCreate() {
-		this.createdDate = new Date();
+		this.createdDate = LocalDateTime.now();
 	}
 
 	@PreUpdate
 	public void onUpdate() {
-		this.updatedDate = new Date();
+		this.updatedDate = LocalDateTime.now();
 	}
 
 	public Long getId() {
@@ -213,19 +212,19 @@ public void setWeightLog(List<WeightLog> weightLog) {
 		this.payment = payment;
 	}
 
-	public Date getCreatedDate() {
+	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getUpdatedDate() {
+	public LocalDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public void setUpdatedDate(Date updatedDate) {
+	public void setUpdatedDate(LocalDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	
@@ -246,23 +245,14 @@ public void setWeightLog(List<WeightLog> weightLog) {
 	}
 
 	
-
-
-	
-	
-
-
 	public Customer(Long id, @NotBlank(message = "Contact Required") String contact,
 			@NotBlank(message = "Name Required") String name, @NotBlank(message = "Gender Required") String gender,
 			@NotBlank(message = "Customer Identifier Reqiured") String customerIdentifier,
 			@NotBlank(message = "Payment Identifier Required") String paymentIdentifier,
-			@NotBlank(message = "Plan Id is Required") String planId, Integer pTSequence, DietPlan dietPlan,
-<<<<<<< HEAD
-			NutritionPlan nutritionPlan, List<Payment> payment, Date createdDate, Date updatedDate,String foodAllergy) {
-=======
+			@NotBlank(message = "Plan Id is Required") String planId,
+			@NotBlank(message = "Food Allergy Required") String foodAllergy, Integer pTSequence, DietPlan dietPlan,
 			NutritionPlan nutritionPlan, List<Payment> payment, Exercise exercise, List<WeightLog> weightLog,
-			CaloriesLog calorieslog, Date createdDate, Date updatedDate) {
->>>>>>> branch 'master' of https://github.com/Muppallasrihari/sprint2.git
+			CaloriesLog calorieslog, LocalDateTime createdDate, LocalDateTime updatedDate) {
 		super();
 		this.id = id;
 		this.contact = contact;
@@ -271,7 +261,7 @@ public void setWeightLog(List<WeightLog> weightLog) {
 		this.customerIdentifier = customerIdentifier;
 		this.paymentIdentifier = paymentIdentifier;
 		this.planId = planId;
-		this.foodAllergy=foodAllergy;
+		this.foodAllergy = foodAllergy;
 		PTSequence = pTSequence;
 		this.dietPlan = dietPlan;
 		this.nutritionPlan = nutritionPlan;
@@ -292,12 +282,8 @@ public void setWeightLog(List<WeightLog> weightLog) {
 				+ ", calorieslog=" + calorieslog + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate
 				+ "]";
 	}
-
 	public Customer() {
 		super();
 		
 	}
-	
-	
-
 }

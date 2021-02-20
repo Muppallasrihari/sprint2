@@ -1,16 +1,10 @@
 package com.cg.healthify.repository;
 
-
-
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cg.healthify.beans.DietPlan;
 
+public interface DietPlanRepository extends JpaRepository<DietPlan, Long> {
 
-
-@Repository
-public interface DietPlanRepository extends CrudRepository<DietPlan,Long>{
-
-   DietPlan  findByCustomerIdentifier(String customerIdentifier);  
+	DietPlan findByCustomerIdentifier(String customerIdentifier);
 }

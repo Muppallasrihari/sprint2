@@ -2,7 +2,6 @@ package com.cg.healthify.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.cg.healthify.beans.WeightLog;
 
@@ -11,7 +10,7 @@ import com.cg.healthify.beans.WeightLog;
  * @author vinotraj
  *
  */
-@Repository
+
 public interface WeightLogRepository extends JpaRepository<WeightLog, Long> {
 
 	/**
