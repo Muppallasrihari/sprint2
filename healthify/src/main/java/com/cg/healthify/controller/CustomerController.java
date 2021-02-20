@@ -28,6 +28,7 @@ private CustomerService customerService;
 private MapValidationErrorService mapValidationErrorService;
 
 
+/**-------------------------------ADD and UPDATE CUSTOMER DATA----------------------------------------**/
 
 	@PostMapping("")
 	public ResponseEntity<?> createNewCustomer(@Valid @RequestBody Customer customer,BindingResult result) {
@@ -36,19 +37,32 @@ private MapValidationErrorService mapValidationErrorService;
 		Customer cust=customerService.save(customer);
 		return new ResponseEntity<Customer>(cust,HttpStatus.OK);
 	}
+/**---------------------------------------------------------------------------------------------------**/
+	
+	
+/**------------------------------FIND CUSTOMER BY CUSTOEMR-ID-----------------------------------------**/	
 	
 	@GetMapping("/{customerIdentifier}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable String customerIdentifier){
 		Customer cust=customerService.findCustomerById(customerIdentifier);
 		return new ResponseEntity<Customer>(cust,HttpStatus.OK);
 	}
+/**---------------------------------------------------------------------------------------------------**/	
+	
+
+/**---------------------------------FIND ALL CUSTOMER DETAILS------------------------------------------**/	
 	@GetMapping("/all")
 	public Iterable<Customer> getAllCustomer(){
 		return customerService.getAllCustomerDetails();
 	}
+/**---------------------------------------------------------------------------------------------------**/
+	
+	
+/**-------------------------------DELETE CUSTOMER BY CUSTOMER ID---------------------------------------**/	
 	@DeleteMapping("/{customerIdentifier}")
 	public ResponseEntity<?> DeleteCustomerById(@PathVariable String customerIdentifier){
 		customerService.deleteCustomerById(customerIdentifier);
 		return new ResponseEntity<String>("Customer with ID "+customerIdentifier+" was deleted",HttpStatus.OK);
 	}
 }
+/**--------------------------**************************************-------------------------------------**/

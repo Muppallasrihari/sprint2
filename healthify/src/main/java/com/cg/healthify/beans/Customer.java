@@ -43,23 +43,24 @@ public class Customer {
 	private String paymentIdentifier;
 	@NotBlank(message = "Plan Id is Required")
 	private String planId;
-	@NotBlank(message = "Food Allergy Required")
-	private String foodAllergy;
-	public String getFoodAllergy() {
-		return foodAllergy;
+	@NotBlank(message = "Food Type Required")
+	private String foodType;
+
+
+	public String getFoodType() {
+		return foodType;
 	}
 
-	public void setFoodAllergy(String foodAllergy) {
-		this.foodAllergy = foodAllergy;
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
 	}
-
 	private Integer PTSequence = 0;
 
 	/**
 	 * ----------------------------------OneToOne mapping with
 	 * DietPlan-------------------------
 	 **/
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "customer")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, targetEntity =DietPlan.class)
 	private DietPlan dietPlan;
 	
 	/**
@@ -248,7 +249,7 @@ public void setWeightLog(List<WeightLog> weightLog) {
 			@NotBlank(message = "Customer Identifier Reqiured") String customerIdentifier,
 			@NotBlank(message = "Payment Identifier Required") String paymentIdentifier,
 			@NotBlank(message = "Plan Id is Required") String planId,
-			@NotBlank(message = "Food Allergy Required") String foodAllergy, Integer pTSequence, DietPlan dietPlan,
+			@NotBlank(message = "Food Allergy Required") String foodType, Integer pTSequence, DietPlan dietPlan,
 			NutritionPlan nutritionPlan, List<Payment> payment, Exercise exercise, List<WeightLog> weightLog,
 			CaloriesLog calorieslog, LocalDateTime createdDate, LocalDateTime updatedDate) {
 		super();
@@ -259,7 +260,7 @@ public void setWeightLog(List<WeightLog> weightLog) {
 		this.customerIdentifier = customerIdentifier;
 		this.paymentIdentifier = paymentIdentifier;
 		this.planId = planId;
-		this.foodAllergy = foodAllergy;
+		this.foodType = foodType;
 		PTSequence = pTSequence;
 		this.dietPlan = dietPlan;
 		this.nutritionPlan = nutritionPlan;

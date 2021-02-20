@@ -17,29 +17,24 @@ public class DietPlan {
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 private Long id;
-@NotBlank(message="Customer Identifier Reqiured")
+
+@NotBlank(message="Food Type Reqiured")
 @Column(unique=true,updatable=false)
-private String customerIdentifier;
 private String foodType;
+//@NotBlank(message="Fat Ratio Required")
+//@Column(unique=true,updatable=false)
 private Double fatRatio;
+//@NotBlank(message="carbs Ratio Reqiured")
+//@Column(unique=true,updatable=false)
 private Double carbsRatio;
+//@NotBlank(message="protien Ratio Reqiured")
+//@Column(unique=true,updatable=false)
 private Double proteinRatio;
-private Double total;
-@OneToOne(fetch=FetchType.EAGER)
-@JoinColumn(name="id",nullable=false)
-@JsonIgnore
-private Customer customer;
 public Long getId() {
 	return id;
 }
 public void setId(Long id) {
 	this.id = id;
-}
-public String getCustomerIdentifier() {
-	return customerIdentifier;
-}
-public void setCustomerIdentifier(String customerIdentifier) {
-	this.customerIdentifier = customerIdentifier;
 }
 public String getFoodType() {
 	return foodType;
@@ -66,18 +61,5 @@ public Double getProteinRatio() {
 public void setProteinRatio(Double proteinRatio) {
 	this.proteinRatio = proteinRatio;
 }
-public Double getTotal() {
-	return total;
-}
-public void setTotal(Double total) {
-	this.total = total;
-}
-public Customer getCustomer() {
-	return customer;
-}
-public void setCustomer(Customer customer) {
-	this.customer = customer;
-}
-
 
 }

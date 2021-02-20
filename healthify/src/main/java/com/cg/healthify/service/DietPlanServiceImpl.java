@@ -20,41 +20,22 @@ public class DietPlanServiceImpl implements DietPlanService{
 	@Override
 	public DietPlan saveDietPlan(DietPlan dietPlan) {
 		try {
-			System.out.println("-----------------------"+dietPlan.getFoodType());
-			if(dietPlan.getFoodType().equalsIgnoreCase("Veg")){
-				dietPlan.setProteinRatio(5.5);
-				dietPlan.setFatRatio(10.0);
-				dietPlan.setCarbsRatio(7.0);
-				dietPlan.setTotal(dietPlan.getProteinRatio()+dietPlan.getFatRatio()+dietPlan.getCarbsRatio());
-			}
-			if(dietPlan.getFoodType().equalsIgnoreCase("NonVeg")){
-				dietPlan.setProteinRatio(6.5);
-				dietPlan.setFatRatio(20.0);
-				dietPlan.setCarbsRatio(11.0);
-				dietPlan.setTotal(dietPlan.getProteinRatio()+dietPlan.getFatRatio()+dietPlan.getCarbsRatio());
-			}
-			Customer customer=new Customer();
-			if(customer.getCustomerIdentifier()!=null) {
-				dietPlan=dietPlanRepository.findByCustomerIdentifier(customer.getCustomerIdentifier());
-				dietPlan.setCustomerIdentifier(dietPlan.getCustomerIdentifier().toUpperCase());
-				customer.setDietPlan(dietPlan);			
-				dietPlan.setCustomer(customer);
-			}
+		//nutritionPlan.setPlanId(nutritionPlan.getPlanId().toUpperCase());/
+		dietPlan.setFoodType(dietPlan.getFoodType().toUpperCase());
 			return dietPlanRepository.save(dietPlan);	
 		}
 		catch(Exception e) {
 			throw new DietPlanException("This Diet-Plan: "+dietPlan.getId()+" already exists");
 		}
 	}
-
 /**--------------------------------------------------------------------------------------------**/
 
-/**---------------------------------Find Diet Plan By Id---------------------------------------**/
+/**---------------------------------Find Diet Plan By FoodType---------------------------------------**/
 	@Override	
-	public DietPlan getDietPlanById(String customerIdentifier) {
-		DietPlan diet= dietPlanRepository.findByCustomerIdentifier(customerIdentifier);
+	public DietPlan getDietPlanByFoodType(String foodType) {
+		DietPlan diet= dietPlanRepository.findByFoodType(foodType);
 		if(diet==null) {
-			throw new DietPlanException("Id: "+customerIdentifier+" not exists");
+			throw new DietPlanException("Id: "+foodType.toUpperCase()+" not exists");
 		}
 		return diet;
 	}
@@ -67,13 +48,19 @@ public class DietPlanServiceImpl implements DietPlanService{
 		return dietPlanRepository.findAll();
 	}
 /**----------------------------------------------------------------------------------------**/
-	/*
-public void deleteDietPlan(String customerIdentifier) {
-	DietPlan diet= dietPlanRepository.findByCustomerIdentifier(customerIdentifier);
+	
+/**-----------------------Delete By FoodType------------------------------------------------**/
+	
+public int deleteByFoodType(String foodType) {
+	int res=0;
+	DietPlan diet= dietPlanRepository.findByFoodType(foodType);
 	if(diet==null) {
-		throw new DietPlanException("Id: "+customerIdentifier+" not exists");
-	}
-	       dietPlanRepository.delete(diet);
-}*/
+		throw new DietPlanException("Id: "+foodType.toUpperCase()+"not exists");
+	}else {
+		 dietPlanRepository.delete(diet);
+		res=1;
+	}   
+	       return res;
+}
 
 }

@@ -6,5 +6,6 @@ import com.cg.healthify.beans.DietPlan;
 
 public interface DietPlanRepository extends JpaRepository<DietPlan, Long> {
 
-	DietPlan findByCustomerIdentifier(String customerIdentifier);
+//	DietPlan findByCustomerIdentifier(String customerIdentifier);
+	DietPlan  findByFoodType(String foodType);
 }

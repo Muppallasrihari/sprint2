@@ -42,9 +42,9 @@ public class DietPlanController {
 	
 
 /**-------------------------------Find DietPlan By CustomerID---------------------------------------------**/	
-	@GetMapping("/{customerIdentifier}")
-	public ResponseEntity<DietPlan> getDietPlanById(@PathVariable String customerIdentifier){
-		DietPlan diet=dietPlanService.getDietPlanById(customerIdentifier);
+	@GetMapping("/{foodType}")
+	public ResponseEntity<DietPlan> getDietPlanByFoodType(@PathVariable String foodType){
+		DietPlan diet=dietPlanService.getDietPlanByFoodType(foodType);
 		return new ResponseEntity<DietPlan>(diet,HttpStatus.OK);
 	}
 	
@@ -55,12 +55,14 @@ public class DietPlanController {
 		return dietPlanService.getAllDietDetails();
 	}
 /**--------------------------------------------------------------------------------------------------------**/	
+
 	
-	/*
+/**-----------------------------------Delete DietPlan By FoodType------------------------------------------**/	
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteDietPlanById(@PathVariable String id){
-	       dietPlanService.deleteDietPlan(id);
-	       return new ResponseEntity<String>("Customer with ID "+id+" was deleted",HttpStatus.OK);
-	}*/	
-	
+    public ResponseEntity<?> deleteDietPlanById(@PathVariable String foodType){
+	       dietPlanService.deleteByFoodType(foodType);
+	       return new ResponseEntity<String>("DietPlan with FoodType "+foodType.toUpperCase()+" is deleted",HttpStatus.OK);
+	}
+/**---------------------------------------------------------------------------------------------------------**/	
 }

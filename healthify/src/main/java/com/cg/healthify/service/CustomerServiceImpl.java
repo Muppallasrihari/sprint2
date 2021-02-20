@@ -29,50 +29,34 @@ private ExerciseRepository exerciseRepository;
 @Override
 public Customer save(Customer customer) {
 	try {
-		customer.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());
-		NutritionPlan plan=nutritionPlanRepository.findByPlanId(customer.getPlanId().toUpperCase());
-		Exercise exercise = exerciseRepository.findByExIdentifier(customer.getPlanId().toUpperCase());
- 
-
-		
-	  if(customer.getId()==null) {
-/**----------------------------Diet-Plan-Section----------------------------------------------**/		  
-		DietPlan dietPlan=new DietPlan();
-		dietPlan.setFoodType(customer.getFoodAllergy());
-		if(dietPlan.getFoodType().equalsIgnoreCase("NonVeg")){
-			dietPlan.setFoodType("Veg");
-			dietPlan.setProteinRatio(5.5);
-			dietPlan.setFatRatio(10.0);
-			dietPlan.setCarbsRatio(7.0);
-			dietPlan.setTotal(dietPlan.getProteinRatio()+dietPlan.getFatRatio()+dietPlan.getCarbsRatio());
-		}
-		if(dietPlan.getFoodType().equalsIgnoreCase("Veg")){
-			dietPlan.setFoodType("NonVeg");
-			dietPlan.setProteinRatio(6.5);
-			dietPlan.setFatRatio(20.0);
-			dietPlan.setCarbsRatio(11.0);
-			dietPlan.setTotal(dietPlan.getProteinRatio()+dietPlan.getFatRatio()+dietPlan.getCarbsRatio());
-		}
-		customer.setDietPlan(dietPlan);
-		dietPlan.setCustomer(customer);
-		dietPlan.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());
-}
-	 if(customer.getId()!=null) {
-		customer.setDietPlan(dietPlanRepository.findByCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase()));
-/**--------------------------------------------------------------------------------------------------------------------**/			
+		customer.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());		  
+/**------------------------------------------DIET PLAN PART---------------------------------------------------------------**/			
+	 DietPlan dietplan=dietPlanRepository.findByFoodType(customer.getFoodType().toUpperCase());
+	 if(dietplan!=null) {
+		 customer.setDietPlan(dietplan); 
 	 }
+/**-----------------------------------------------------------------------------------------------------------------------**/	 
+
+/**-------------------------------------NUTRITION PLAN PART---------------------------------------------------------------**/	 
+	 NutritionPlan plan=nutritionPlanRepository.findByPlanId(customer.getPlanId().toUpperCase());
 	 if(plan!=null) {
 		 customer.setNutritionPlan(plan);
-		 customer.setExercise(exercise);
 	 }
+/**-----------------------------------------------------------------------------------------------------------------------**/	 
+		
+/**-------------------------------------EXERCISE PART---------------------------------------------------------------------**/	 
+	 Exercise exercise = exerciseRepository.findByExIdentifier(customer.getPlanId().toUpperCase());
+		if(exercise!=null) {
+			 customer.setExercise(exercise); 
+		 }	 
 	}
+/**-----------------------------------------------------------------------------------------------------------------------**/	
 	catch(Exception e) {
 		throw new CustomerException("Contact: "+customer.getContact()+" already exists");
 	}
 	return customerRepository.save(customer);
 	}
 /**----------------------------------------------------------------------------------------**/
-
 
 /**-------------------------------Find Customer By CustomerIdentifier---------------------------------------**/
 @Override
@@ -107,9 +91,3 @@ public void deleteCustomerById(String customerIdentifier) {
 }
 }
 /**-------------------------------------------------------------------------------------------------------**/
-
-/*try {
-		customer.setIdentifier(customer.getIdentifier().toUpperCase());
-		catch(Exception e) {
-		throw new CustomerNameException("Name: "+customer.getIdentifier().toUpperCase()+" already there");
-	}*/

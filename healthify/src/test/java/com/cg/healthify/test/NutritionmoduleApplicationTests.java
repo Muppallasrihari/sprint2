@@ -21,7 +21,7 @@ public class NutritionmoduleApplicationTests {
 
 	@Mock
 	NutritionPlanRepository nutritionPlanRepository;
-
+/*
 	@Test
 	public void getNutritionPlanByIdForValidPlanId() {
 		NutritionPlan nutritionPlan = new NutritionPlan();
@@ -46,11 +46,11 @@ public class NutritionmoduleApplicationTests {
 		assertEquals(nutritionPlan,plan);
 
 	}
-	
+	*/
 	@Test
 	public void createNutritionPlanForValidInput() {
 		NutritionPlan nutritionPlan = new NutritionPlan();
-		nutritionPlan.setPlanId("GOLD");
+		nutritionPlan.setPlanId("Silver");
 		nutritionPlan.setDescription("It is a 60 days plan");
 		nutritionPlan.setPrice(20000);
 		when(nutritionPlanRepository.save(nutritionPlan)).thenReturn(nutritionPlan);

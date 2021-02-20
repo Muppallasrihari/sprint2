@@ -21,6 +21,15 @@ public class Payment {
 	private Long id;
 	@Column(unique = true)
 	private String transactionId;
+	private Double currentAmount;
+	public Double getCurrentAmount() {
+		return currentAmount;
+	}
+
+	public void setCurrentAmount(Double currentAmount) {
+		this.currentAmount = currentAmount;
+	}
+
 	private Double actualAmount;
 	private String paymentIdentifier;
 	@NotBlank(message = "Payment Gateway Reqiured")
