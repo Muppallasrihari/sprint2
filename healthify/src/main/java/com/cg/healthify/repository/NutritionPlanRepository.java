@@ -1,15 +1,12 @@
 package com.cg.healthify.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 
 import com.cg.healthify.beans.NutritionPlan;
 
 
-
-
-@Repository
-public interface NutritionPlanRepository extends CrudRepository<NutritionPlan,Integer>{
+public interface NutritionPlanRepository extends JpaRepository<NutritionPlan,Integer>{
 
 	NutritionPlan findByPlanId(String planId);
 

@@ -1,8 +1,9 @@
 package com.cg.healthify.beans;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -55,10 +56,10 @@ public class Exercise {
 	
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date created_At;
+	private LocalDateTime created_At;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date updated_At;
+	private LocalDateTime updated_At;
 	
 	public int getId() {
 		return id;
@@ -86,27 +87,27 @@ public class Exercise {
 		this.exReps = exReps;
 	}
 	
-	public Date getCreated_At() {
+	public LocalDateTime getCreated_At() {
 		return created_At;
 	}
-	public void setCreated_At(Date created_At) {
+	public void setCreated_At(LocalDateTime created_At) {
 		this.created_At = created_At;
 	}
-	public Date getUpdated_At() {
+	public LocalDateTime getUpdated_At() {
 		return updated_At;
 	}
-	public void setUpdated_At(Date updated_At) {
+	public void setUpdated_At(LocalDateTime updated_At) {
 		this.updated_At = updated_At;
 	}
 	
 	@PrePersist
 	public void onCreate() {
-		this.created_At = new Date();
+		this.created_At = LocalDateTime.now();
 	}
 	
 	@PreUpdate
 	public void onUpdate() {
-		this.updated_At = new Date();
+		this.updated_At = LocalDateTime.now();
 	}
 
 }
