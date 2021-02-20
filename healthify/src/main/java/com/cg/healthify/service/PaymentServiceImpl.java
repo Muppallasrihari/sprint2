@@ -58,12 +58,19 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public Payment deletePaymentById(String transactionId) {
-		Payment pay = paymentRepository.findByTransactionId(transactionId);
-		if (pay == null) {
+	public int deletePaymentById(String transactionId) {
+		int result=0;
+		Payment payment = paymentRepository.findByTransactionId(transactionId);
+		if (payment == null) {
 			throw new PaymentIdNotFoundException("Pay Id:" + transactionId + " not found");
 		}
-		return pay;
+		else {
+			result = 1;
+			paymentRepository.delete(payment);
+			
+		}
+		
+		return result;
 
 	}
 
